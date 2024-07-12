@@ -10,6 +10,6 @@ public sealed class ProductController(IProductService productService) : Controll
 {
     public async Task<IActionResult> Create(CreateProductRequest request)
     {
-        return await productService.AddAsync()
+        return await productService.
     }
 }
