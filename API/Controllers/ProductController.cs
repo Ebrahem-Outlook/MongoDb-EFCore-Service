@@ -1,4 +1,5 @@
-﻿using API.Services;
+﻿using API.Contracts;
+using API.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
@@ -7,5 +8,8 @@ namespace API.Controllers;
 [ApiController]
 public sealed class ProductController(IProductService productService) : ControllerBase
 {
-
+    public async Task<IActionResult> Create(CreateProductRequest request)
+    {
+        return await productService.AddAsync()
+    }
 }

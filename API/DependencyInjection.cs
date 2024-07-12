@@ -8,9 +8,11 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddAPI(this IServiceCollection services, IConfiguration configuration)
     {
-        string? connection = configuration.GetConnectionString("Docker-MongoDB");
+        string? connectionString = configuration.GetConnectionString("Docker-MongoDB");
 
-        services.AddDbContext<AppDbContext>(options => options.UseMongoDB(connection, "API_DB"));
+        string? databaseName = configuration.GetSection("DatabaseSettings:DatabaseName").Value;
+
+        services.AddDbContext<AppDbContext>(options => options.UseMongoDB(connectionString, databaseName));
 
         services.AddScoped<IDbContext>(serviceProvider => serviceProvider.GetRequiredService<AppDbContext>());
 

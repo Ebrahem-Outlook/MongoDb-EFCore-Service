@@ -1,0 +1,27 @@
+version: '3.4'
+
+services:
+  api:
+    image: ${DOCKER_REGISTRY-}api
+    build:
+      context: .
+      dockerfile: API/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__Docker-MongoDB=mongodb://mongodb:27017
+      - DatabaseSettings__DatabaseName=API_DB
+    depends_on:
+      - mongodb
+    ports:
+      - "5000:80"
+
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:
