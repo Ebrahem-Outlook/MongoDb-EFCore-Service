@@ -8,7 +8,7 @@ public abstract class AggregateRoot : Entity
 
     protected AggregateRoot() : base() { }
 
-    private readonly List<IDomainEvent> domainEvents = new List<IDomainEvent>();
+    private readonly List<IDomainEvent> domainEvents = new();
 
     public IReadOnlyCollection<IDomainEvent> DomainEvents => domainEvents.AsReadOnly();
 

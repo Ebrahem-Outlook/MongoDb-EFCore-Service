@@ -1,12 +1,26 @@
 ﻿using Domain.Products;
-using Domain.Products.Repository;
 using Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories.Products;
 
-internal sealed class ProductReadRepository(ReadDbContext dbContext) : IProductReadRepository
+internal sealed class ProductRepository(AppDbContext dbContext) : IProductRepository
 {
+    public async Task AddAsync(Product product, CancellationToken cancellationToken = default)
+    {
+        await dbContext.Set<Product>().AddAsync(product, cancellationToken);
+    }
+
+    public void Delete(Product product)
+    {
+        dbContext.Remove(product);
+    }
+
+    public void Update(Product product)
+    {
+        dbContext.Update(product);
+    }
+
     public async Task<List<Product>?> GetAllAsync(CancellationToken cancellationToken = default)
     {
         return await dbContext.Set<Product>().ToListAsync(cancellationToken);
@@ -19,6 +33,6 @@ internal sealed class ProductReadRepository(ReadDbContext dbContext) : IProductR
 
     public async Task<List<Product>?> GetByNameAsync(string name, CancellationToken cancellationToken = default)
     {
-        return await dbContext.Set<Product>().Where(p => p.Name == name).ToListAsync(cancellationToken);
+        return await dbContext.Set<Product>().Where(p => p.Name.Value == name).ToListAsync(cancellationToken);
     }
 }

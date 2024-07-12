@@ -1,30 +1,26 @@
 ﻿using Domain.Core.BaseType;
 using Domain.Products.Events;
+using Domain.Products.ValueObjects;
 
 namespace Domain.Products;
 
 public sealed class Product : AggregateRoot
 {
-    private Product(string name, string description, decimal price, int stock) : base(Guid.NewGuid())
+    private Product(Name name, Description description, Price price, Stock stock)
     {
         Name = name;
         Description = description;
         Price = price;
         Stock = stock;
-        CreateAt = DateTime.UtcNow;
-        UpdateAt = CreateAt;
     }
 
     private Product() : base() { }
 
-    public string Name { get; private set; } = default!;
-    public string Description { get; private set; } = default!;
-    public decimal Price { get; private set; }
-    public int Stock{ get; private set; }
-    public DateTime CreateAt{ get; private set; }
-    public DateTime UpdateAt { get; private set; }
-
-    public static Product Create(string name, string description, decimal price, int stock)
+    public Name Name { get; private set; } = default!;
+    public Description Description { get; private set; } = default!;
+    public Price Price { get; private set; } = default!;
+    public Stock Stock{ get; private set; } = default!;
+    public static Product Create(Name name, Description description, Price price, Stock stock)
     {
         Product product = new Product(name, description, price, stock);
 
@@ -33,7 +29,7 @@ public sealed class Product : AggregateRoot
         return product;
     }
 
-    public void Update(string name, string description, decimal price, int stock)
+    public void Update(Name name, Description description, Price price, Stock stock)
     {
         Name = name;
         Description = description;
