@@ -5,13 +5,13 @@ using System.Reflection;
 
 namespace Infrastructure.Database;
 
-public sealed class AppDbContext : DbContext, IDbContext
+public sealed class WriteDbContext : DbContext, IDbContext
 {
-    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+    public WriteDbContext(DbContextOptions<WriteDbContext> options) : base(options) { }
 
     public new DbSet<TEntity> Set<TEntity>() where TEntity : Entity
     {
-        throw new NotImplementedException();
+        return base.Set<TEntity>();
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
