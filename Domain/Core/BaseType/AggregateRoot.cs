@@ -1,4 +1,6 @@
-﻿namespace Domain.Core.BaseType;
+﻿using Domain.Core.Events;
+
+namespace Domain.Core.BaseType;
 
 public abstract class AggregateRoot : Entity
 {
@@ -6,5 +8,11 @@ public abstract class AggregateRoot : Entity
 
     protected AggregateRoot() : base() { }
 
-    private readonly List<>
+    private readonly List<IDomainEvent> domainEvents = new List<IDomainEvent>();
+
+    public IReadOnlyCollection<IDomainEvent> DomainEvents => domainEvents.AsReadOnly();
+
+    public void RaiseDomainEvent(IDomainEvent @event) => domainEvents.Add(@event);
+
+    public void Clear() => domainEvents.Clear();
 }
