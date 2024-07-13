@@ -17,7 +17,7 @@ public sealed class Product : AggregateRoot
     private Product() : base() { }
 
     public Name Name { get; private set; } = default!;
-    public Description Description { get; private set; } = default!;
+    public Description Description { get; private set; } = default!; 
     public Price Price { get; private set; } = default!;
     public Stock Stock{ get; private set; } = default!;
     public static Product Create(Name name, Description description, Price price, Stock stock)

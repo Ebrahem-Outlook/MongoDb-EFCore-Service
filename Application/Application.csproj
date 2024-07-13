@@ -7,6 +7,24 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Products\Commands\UpdateProduct\**" />
+    <Compile Remove="Products\Events\ProductDeleted\**" />
+    <Compile Remove="Products\Events\ProductUpdated\**" />
+    <Compile Remove="Products\Queries\GetById\**" />
+    <Compile Remove="Products\Queries\GetByName\**" />
+    <EmbeddedResource Remove="Products\Commands\UpdateProduct\**" />
+    <EmbeddedResource Remove="Products\Events\ProductDeleted\**" />
+    <EmbeddedResource Remove="Products\Events\ProductUpdated\**" />
+    <EmbeddedResource Remove="Products\Queries\GetById\**" />
+    <EmbeddedResource Remove="Products\Queries\GetByName\**" />
+    <None Remove="Products\Commands\UpdateProduct\**" />
+    <None Remove="Products\Events\ProductDeleted\**" />
+    <None Remove="Products\Events\ProductUpdated\**" />
+    <None Remove="Products\Queries\GetById\**" />
+    <None Remove="Products\Queries\GetByName\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="FluentValidation" Version="11.9.2" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.9.2" />
     <PackageReference Include="MediatR" Version="12.3.0" />
@@ -19,11 +37,6 @@
 
   <ItemGroup>
     <Folder Include="Core\Behaviers\" />
-    <Folder Include="Products\Commands\UpdateProduct\" />
-    <Folder Include="Products\Events\ProductDeleted\" />
-    <Folder Include="Products\Events\ProductUpdated\" />
-    <Folder Include="Products\Queries\GetById\" />
-    <Folder Include="Products\Queries\GetByName\" />
   </ItemGroup>
 
 </Project>
